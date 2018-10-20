@@ -206,7 +206,7 @@ msgid ""
 "Documents are shared with everyone in this call. The supported file types"
 " are PDF and OpenDocument files."
 msgstr ""
-"Les documents sont partagés avec tous les participants de cet appel.  Les "
+"Les documents sont partagés avec tous les participants de cet appel. Les "
 "documents PDF et OpenDocument sont supportés."
 
 msgid "Upload"
@@ -612,10 +612,10 @@ msgid "Incoming file:"
 msgstr "Fichier entrant:"
 
 msgid "You shared your location:"
-msgstr "Vous partagez votre position :"
+msgstr "Vous partagez votre position:"
 
 msgid "Location received:"
-msgstr "Position reçue :"
+msgstr "Position reçue:"
 
 msgid "You accepted the contact request."
 msgstr "Vous avez accepté la demande de mise en relation."
@@ -644,7 +644,7 @@ msgstr ""
 "sont pas possibles."
 
 msgid "Close this window and disconnect?"
-msgstr "Voulez-vous fermer cette fenêtre et vous déconnecter ?"
+msgstr "Voulez-vous fermer cette fenêtre et vous déconnecter?"
 
 msgid "Contacts Manager"
 msgstr "Gestionnaire de contacts"
@@ -760,13 +760,13 @@ msgid "Use browser language"
 msgstr "Utiliser la langue du navigateur"
 
 msgid "Meet with me here:"
-msgstr "Rejoins moi là :"
+msgstr "Rejoins moi là:"
 
 msgid "Please enter a new Room PIN to lock the room"
 msgstr "Veuillez entrer un nouveau code PIN pour verrouiller le salon."
 
 msgid "Do you want to unlock the room?"
-msgstr "Voulez-vous déverrouiller le salon ?"
+msgstr "Voulez-vous déverrouiller le salon?"
 
 msgid "Room name"
 msgstr "Nom du salon"

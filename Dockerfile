@@ -71,15 +71,6 @@ RUN ./autogen.sh && \
 RUN rm /srv/spreed-webrtc/dist_*/*.tar.gz
 RUN mv /srv/spreed-webrtc/dist_*/spreed-webrtc-* /srv/spreed-webrtc/dist
 
-# Add gear required by Dockerfile.run.
-COPY Dockerfile.run /
-COPY scripts/docker_entrypoint.sh /
-
-# Running this image produces a tarball suitable to be piped into another
-# Docker build command.
-CMD tar -cf - -C / Dockerfile.run docker_entrypoint.sh /srv/spreed-webrtc/dist
-
-
 
 
 # Once application has been built, prepare production image
@@ -88,6 +79,9 @@ LABEL maintainer="Simon Eisenmann <simon@struktur.de>"
 
 # Add Spreed WebRTC as provided by builder
 COPY --from=0 /srv/spreed-webrtc /srv/spreed-webrtc
+
+# Add gear required by run.
+COPY scripts/docker_entrypoint.sh /
 
 ENV LANG=C.UTF-8
 

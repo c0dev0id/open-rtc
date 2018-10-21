@@ -78,7 +78,7 @@ FROM frolvlad/alpine-glibc:alpine-3.3_glibc-2.23
 LABEL maintainer="Simon Eisenmann <simon@struktur.de>"
 
 # Add Spreed WebRTC as provided by builder
-COPY --from=0 /srv/spreed-webrtc /srv/spreed-webrtc
+COPY --from=0 /srv/spreed-webrtc/dist /srv/spreed-webrtc/dist
 
 # Add gear required by run.
 COPY scripts/docker_entrypoint.sh /

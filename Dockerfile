@@ -93,8 +93,8 @@ RUN apk add --no-cache \
 RUN mv /srv/spreed-webrtc/dist/loader/* /srv/spreed-webrtc && \
 	rm -rf /srv/spreed-webrtc/dist/loader && \
 	mv /srv/spreed-webrtc/dist/www/html /srv/spreed-webrtc && \
-	rm -rf /srv/spreed-webrtc/dist/www && \
-	mv /srv/spreed-webrtc/dist/www/static /srv/spreed-webrtc
+	mv /srv/spreed-webrtc/dist/www/static /srv/spreed-webrtc && \
+	rm -rf /srv/spreed-webrtc/dist/www
 
 # Create default config.
 RUN cp -v /srv/spreed-webrtc/server.conf.in /srv/spreed-webrtc/default.conf && \

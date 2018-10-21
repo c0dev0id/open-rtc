@@ -80,8 +80,8 @@ LABEL maintainer="Simon Eisenmann <simon@struktur.de>"
 # Add Spreed WebRTC as provided by builder
 COPY --from=0 /srv/spreed-webrtc/dist /srv/spreed-webrtc/dist
 
-# Add gear required by run.
-COPY scripts/docker_entrypoint.sh /
+# Add entrypoint required by run.
+COPY scripts/docker_entrypoint.sh /srv/entrypoint.sh
 
 ENV LANG=C.UTF-8
 
@@ -91,11 +91,10 @@ RUN apk add --no-cache \
 
 # Move around stuff from tarball to their expected locations.
 RUN mv /srv/spreed-webrtc/dist/loader/* /srv/spreed-webrtc && \
+	rm -rf /srv/spreed-webrtc/dist/loader && \
 	mv /srv/spreed-webrtc/dist/www/html /srv/spreed-webrtc && \
+	rm -rf /srv/spreed-webrtc/dist/www && \
 	mv /srv/spreed-webrtc/dist/www/static /srv/spreed-webrtc
-
-# Add entrypoint.
-COPY docker_entrypoint.sh /srv/entrypoint.sh
 
 # Create default config.
 RUN cp -v /srv/spreed-webrtc/server.conf.in /srv/spreed-webrtc/default.conf && \

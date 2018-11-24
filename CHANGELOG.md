@@ -1,3 +1,12 @@
+## 0.29.5
+
+  * Add UI to lock/unlock a room
+  * Handle getUserMedia failures on FF 49 and newer when no audio or video device is available (#394).
+  * Update Screensharing guide
+  * Add French translation.
+  * Add Spanish translation.
+
+
 ## 0.29.4
 
   * Fixed regression introduced in 0.29.3 that could trigger a ring timeout in conference rooms.

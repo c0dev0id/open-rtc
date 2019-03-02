@@ -66,12 +66,21 @@ open-rtc-server [OPTIONS]
 ### Options
 
 ```
--c="./server.conf": Configuration file.
--cpuprofile="": Write cpu profile to file.
--h=false: Show this usage information and exit.
--l="": Log file, defaults to stderr.
--memprofile="": Write memory profile to this file.
--v=false: Display version number and exit.
+Usage of open-rtc-server:
+  -c string
+        Configuration file. (default "./server.conf")
+  -cpuprofile string
+        Write cpu profile to file.
+  -dc string
+        Default configuration file.
+  -h    Show this usage information and exit.
+  -l string
+        Log file, defaults to stderr.
+  -memprofile string
+        Write memory profile to this file.
+  -oc string
+        Override configuration file.
+  -v    Display version number and exit.
 ```
 
 An example configuration file can be found in server.conf.in.

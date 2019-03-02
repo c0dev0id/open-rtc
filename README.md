@@ -4,7 +4,7 @@ Open-RTC
 Open-RTC implements a WebRTC audio/video call and conferencing server
 and web client.
 
-The latest source of Open-RTC can be found on [GitHub](https://github.com/wargio/open-rtc). If you are a user, just wanting a secure and private alternative for online communication make sure to check out the [Spreedbox](http://spreedbox.com), providing a ready to use hardware with Open-RTC included.
+The latest source of Open-RTC can be found on [GitHub](https://github.com/wargio/open-rtc).
 
 (original project was https://github.com/strukturag/spreed-webrtc)
 

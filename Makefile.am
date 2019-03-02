@@ -173,6 +173,7 @@ tarball: BIN = $(TARPATH)/loader
 tarball: DOCS = $(TARPATH)/loader/docs
 tarball: SHARE = $(TARPATH)/
 tarball: distclean release install
+		mkdir -pv $(TARPATH)
 		echo -n $(PACKAGE_VERSION) > $(TARPATH)/version.txt
 		cp server.conf.in $(TARPATH)/loader
 		tar czf $(DIST)/$(PACKAGE_NAME)-$(PACKAGE_VERSION)_$(BUILD_OS)_$(BUILD_ARCH).tar.gz -C $(DIST) $(PACKAGE_NAME)-$(PACKAGE_VERSION)

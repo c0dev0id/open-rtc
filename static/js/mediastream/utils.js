@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This file is a AMD wrapped version of the sdputils.js from the
  * WebRTC apprtc example. https://github.com/webrtc/apprtc/blob/master/src

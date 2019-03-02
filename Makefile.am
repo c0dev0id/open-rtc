@@ -1,8 +1,9 @@
 #
-# Spreed WebRTC.
+# Open-RTC.
 # Copyright (C) 2013-2014 struktur AG
+# Copyright 2019 - deroad
 #
-# This file is part of Spreed WebRTC.
+# This file is part of Open-RTC.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -23,18 +24,18 @@ ACLOCAL_AMFLAGS = -I m4
 
 unexport GOBIN
 
-EXENAME := spreed-webrtc-server
-GOPKG := github.com/strukturag/spreed-webrtc
+EXENAME := open-rtc-server
+GOPKG := github.com/wargio/open-rtc
 GOPATH := "$(CURDIR)/vendor:$(CURDIR)"
 
-CONFIG_FILE ?= spreed-webrtc-server.conf
+CONFIG_FILE ?= open-rtc-server.conf
 CONFIG_PATH ?= /etc
 GOBUILDFLAGS ?=
 GOTESTFLAGS ?=
 SYSTEM_GOPATH = /usr/share/gocode/src/
 
 BIN ?= @prefix@/sbin
-SHARE ?= @prefix@/share/spreed-webrtc-server
+SHARE ?= @prefix@/share/open-rtc-server
 
 OUTPUT := $(CURDIR)/bin
 OUTPUT_JS := $(CURDIR)/build/out
@@ -70,7 +71,7 @@ dependencies.tsv:
 	set -e ;\
 	TMP=$$(mktemp -d) ;\
 	cp -r $(CURDIR)/vendor $$TMP ;\
-	GOPATH=$$TMP/vendor:$(CURDIR) $(CURDIR)/vendor/bin/godeps $(GOPKG)/src/app/spreed-webrtc-server ./go/... > $(CURDIR)/dependencies.tsv ;\
+	GOPATH=$$TMP/vendor:$(CURDIR) $(CURDIR)/vendor/bin/godeps $(GOPKG)/src/app/open-rtc-server ./go/... > $(CURDIR)/dependencies.tsv ;\
 	rm -rf $$TMP
 
 binary:

@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -123,7 +124,7 @@ define(["underscore", "jquery", "webrtc.adapter"], function(_, $) {
 		if ($window.webrtcDetectedBrowser === "chrome" && $window.webrtcDetectedVersion >= 37) {
 			extension.registerAutoInstall(function() {
 				var d = $q.defer();
-				alertify.dialog.alert(translation._("Screen sharing requires a browser extension. Please add the Spreed WebRTC screen sharing extension to Chrome and try again."));
+				alertify.dialog.alert(translation._("Screen sharing requires a browser extension. Please add the Open-RTC screen sharing extension to Chrome and try again."));
 				d.reject("Manual extension installation required");
 				return d.promise;
 			});

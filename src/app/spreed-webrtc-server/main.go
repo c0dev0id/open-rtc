@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -40,10 +41,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/strukturag/spreed-webrtc/go/channelling"
-	"github.com/strukturag/spreed-webrtc/go/channelling/api"
-	"github.com/strukturag/spreed-webrtc/go/channelling/server"
-	"github.com/strukturag/spreed-webrtc/go/natsconnection"
+	"github.com/wargio/open-rtc/go/channelling"
+	"github.com/wargio/open-rtc/go/channelling/api"
+	"github.com/wargio/open-rtc/go/channelling/server"
+	"github.com/wargio/open-rtc/go/natsconnection"
 
 	"github.com/gorilla/mux"
 	"github.com/strukturag/httputils"
@@ -89,7 +90,7 @@ func runner(runtime phoenix.Runtime) error {
 	// Update configuration from NATS.
 	if useNats && runtime.GetBoolDefault("nats", "configFromNATS", false) {
 		log.Println("Fetching configuration from NATS")
-		configFromNATSSubject := runtime.GetStringDefault("nats", "configFromNATSSubject", "spreed-webrtc.config.get")
+		configFromNATSSubject := runtime.GetStringDefault("nats", "configFromNATSSubject", "open-rtc.config.get")
 		configFromNATSTimeout := time.Duration(runtime.GetIntDefault("nats", "configFromNATSTimeout", 0)) * time.Second
 		// Receive config from bus.
 		var req = &channelling.BusRequest{}

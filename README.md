@@ -1,11 +1,12 @@
-Spreed WebRTC
+Open-RTC
 ===================
 
-Spreed WebRTC implements a WebRTC audio/video call and conferencing server
+Open-RTC implements a WebRTC audio/video call and conferencing server
 and web client.
 
-The latest source of Spreed WebRTC can be found on [GitHub](https://github.com/strukturag/spreed-webrtc). If you are a user, just wanting a secure and private alternative for online communication make sure to check out the [Spreedbox](http://spreedbox.com), providing a ready to use hardware with Spreed WebRTC included.
+The latest source of Open-RTC can be found on [GitHub](https://github.com/wargio/open-rtc). If you are a user, just wanting a secure and private alternative for online communication make sure to check out the [Spreedbox](http://spreedbox.com), providing a ready to use hardware with Open-RTC included.
 
+(original project was https://github.com/strukturag/spreed-webrtc)
 
 ## Build prerequisites
 
@@ -18,16 +19,16 @@ The latest source of Spreed WebRTC can be found on [GitHub](https://github.com/s
 
 ## Runtime dependencies
 
-Spreed WebRTC compiles directly to native code and has no
+Open-RTC compiles directly to native code and has no
 external runtime dependencies. See [here](http://golang.org/doc/faq#How_is_the_run_time_support_implemented)
 for details.
 
 
 ## Building
 
-[![Build Status](https://travis-ci.org/strukturag/spreed-webrtc.png?branch=master)](https://travis-ci.org/strukturag/spreed-webrtc)
+[![Build Status](https://travis-ci.org/wargio/open-rtc.png?branch=master)](https://travis-ci.org/wargio/open-rtc)
 
-If you got spreed-webrtc from the git repository, you will first need
+If you got open-rtc from the git repository, you will first need
 to run the included `autogen.sh` script to generate the `configure`
 script.
 
@@ -59,7 +60,7 @@ $ make binary
 ## Server startup
 
 ```bash
-spreed-webrtc-server [OPTIONS]
+open-rtc-server [OPTIONS]
 ```
 
 ### Options
@@ -115,7 +116,7 @@ adding the query parameter `debug` to your url `https://my_url?debug`.
 Copy the server.conf.in to server.conf.
 
 Build styles, javascript and binary using make. Then run
-``./spreed-webrtc-server``
+``./open-rtc-server``
 
 The server runs on http://localhost:8080/ per default.
 
@@ -125,7 +126,7 @@ and CSS reload directly.
 
 ## Running for production
 
-Spreed WebRTC should be run through a SSL frontend proxy with
+Open-RTC should be run through a SSL frontend proxy with
 support for Websockets. Example configuration for Nginx can be
 found in `doc/NGINX.txt`.
 
@@ -148,33 +149,12 @@ We provide official Docker images at https://hub.docker.com/r/spreed/webrtc/. Of
 course you can build the Docker image yourself as well. Check the Dockerfiles in
 this repository for details and instructions.
 
-Use the following command to run a Spreed WebRTC Docker container with the
-default settings from our official Spreed WebRTC Docker image.
+Use the following command to run a Open-RTC Docker container with the
+default settings from our official Open-RTC Docker image.
 
 ```
-docker run --rm --name my-spreed-webrtc -p 8080:8080 -p 8443:8443 \
-    -v `pwd`:/srv/extra -i -t spreed/webrtc
+docker run --rm --name my-open-rtc -p 8080:8080 -p 8443:8443 -v `pwd`:/srv/extra -i -t spreed/webrtc
 ```
-
-## Setup Screensharing
-
-### Chrome
-
-Chromium-based browsers (e.g. Google Chrome) require the [Spreed.ME screen sharing
-extension](https://www.spreed.me/extension/).
-
-### Firefox
-
-Screensharing with Firefox >= 52 should work out of the box.
-When using Firefox 36 – 51 you must append the domain being used to the allowed
-domains to access your screen. You do this by navigating to `about:config`, search
-for 'media.getusermedia.screensharing.allowed_domains', and append the domain
-to the list of strings. You can edit the field simply by double clicking on it.
-Ensure that you follow the syntax rules of the field. If you are using an `ip:port`
-url, simply append `ip` to the list. Also ensure that you are using `https`,
-otherwise permission will be denied to share your screen. You do not need to restart
-or reload in order for it to take affect.
-
 
 ## Contributing
 
@@ -187,4 +167,4 @@ or reload in order for it to take affect.
 
 ## License
 
-`Spreed WebRTC` uses the AGPL license, see our `LICENSE` file.
+`Open-RTC` uses the AGPL license, see our `LICENSE` file.

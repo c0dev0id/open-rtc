@@ -1,8 +1,9 @@
 #
-# Spreed WebRTC.
+# Open-RTC.
 # Copyright (C) 2013-2014 struktur AG
+# Copyright 2019 - deroad
 #
-# This file is part of Spreed WebRTC.
+# This file is part of Open-RTC.
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -21,12 +22,12 @@
 dnl required version of autoconf
 AC_PREREQ([2.53])
 
-AC_INIT([spreed-webrtc],[unknown],[opensource@struktur.de],[],[https://github.com/strukturag/spreed-webrtc])
+AC_INIT([open-rtc],[unknown],[wargio@libero.it],[],[https://github.com/wargio/open-rtc])
 
 I18N_VERSION="1.0"
-I18N_PROJECT="Spreed WebRTC"
-I18N_COPYRIGHT="struktur AG"
-I18N_BUG_ADDRESS="simon@struktur.de"
+I18N_PROJECT="Open RTC"
+I18N_COPYRIGHT="-"
+I18N_BUG_ADDRESS="wargio@libero.it"
 AC_SUBST(I18N_VERSION)
 AC_SUBST(I18N_PROJECT)
 AC_SUBST(I18N_COPYRIGHT)
@@ -40,7 +41,7 @@ SASS_VERSION_MIN=3.3.0
 SCSS_LINT_VERSION_MIN=0.33.0
 PO2JSON_VERSION_MIN=0.4.1
 
-AC_CONFIG_SRCDIR([src/app/spreed-webrtc-server/main.go])
+AC_CONFIG_SRCDIR([src/app/open-rtc-server/main.go])
 AC_CONFIG_MACRO_DIR([m4])
 
 dnl required version of automake

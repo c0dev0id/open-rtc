@@ -17,7 +17,7 @@ if [ "$NEWCERT" = "1" -o ! -s /srv/cert.pem ]; then
 	openssl ecparam -genkey -name secp384r1 -out /srv/privkey.pem
 	openssl req -new -x509 -key /srv/privkey.pem \
 				-out /srv/cert.pem -days 3650 \
-				-subj /CN=spreed-webrtc \
+				-subj /CN=open-rtc \
 				-config /etc/ssl/openssl.cnf \
 				-sha256 -extensions v3_req
 
@@ -33,14 +33,14 @@ if [ "$NEWSECRETS" = "1" -o ! -s /srv/secrets.conf ]; then
 	echo "SERVER_TOKEN=${SERVER_TOKEN:-$(randomhex 32)}" >>/srv/secrets.conf.tmp
 	echo "SHARED_SECRET=${SHARED_SECRET:-$(randomhex 32)}" >>/srv/secrets.conf.tmp
 	. /srv/secrets.conf.tmp
-	sed -i -e "s/sessionSecret =.*/sessionSecret = $SESSION_SECRET/" /srv/spreed-webrtc/default.conf
-	sed -i -e "s/encryptionSecret =.*/encryptionSecret = $ENCRYPTION_SECRET/" /srv/spreed-webrtc/default.conf
-	sed -i -e "s/serverToken =.*/serverToken = $SERVER_TOKEN/" /srv/spreed-webrtc/default.conf
-	sed -i -e "s/;sharedsecret_secret =.*/sharedsecret_secret = $SHARED_SECRET/" /srv/spreed-webrtc/default.conf
+	sed -i -e "s/sessionSecret =.*/sessionSecret = $SESSION_SECRET/" /srv/open-rtc/default.conf
+	sed -i -e "s/encryptionSecret =.*/encryptionSecret = $ENCRYPTION_SECRET/" /srv/open-rtc/default.conf
+	sed -i -e "s/serverToken =.*/serverToken = $SERVER_TOKEN/" /srv/open-rtc/default.conf
+	sed -i -e "s/;sharedsecret_secret =.*/sharedsecret_secret = $SHARED_SECRET/" /srv/open-rtc/default.conf
 	mv /srv/secrets.conf.tmp /srv/secrets.conf
 fi
 echo "Server secrets:"
 cat /srv/secrets.conf
 
-echo "Staring Spreed WebRTC server ..."
-exec /srv/spreed-webrtc/spreed-webrtc-server "$@"
+echo "Staring Open-RTC server ..."
+exec /srv/open-rtc/open-rtc-server "$@"

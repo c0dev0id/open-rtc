@@ -1,19 +1,19 @@
-# Spreed WebRTC server in minimal Docker (for production)
+# Open-RTC server in minimal Docker (for production)
 #
-# This Dockerfile creates a container which builds Spreed WebRTC as found in the
+# This Dockerfile creates a container which builds Open-RTC as found in the
 # current folder.
 #
 # Create the image:
 #
 #   ```
-#   docker build -t spreed-webrtc -f Dockerfile .
+#   docker build -t open-rtc -f Dockerfile .
 #   ```
 #
 # Afterwards run the container like this:
 #
 #   ```
-#   docker run --rm --name my-spreed-webrtc -p 8080:8080 -p 8443:8443 \
-#       -v `pwd`:/srv/extra -i -t spreed-webrtc
+#   docker run --rm --name my-open-rtc -p 8080:8080 -p 8443:8443 \
+#       -v `pwd`:/srv/extra -i -t open-rtc
 #   ```
 #
 # Now you can either use a frontend proxy like Nginx to provide TLS to Spreed
@@ -26,8 +26,8 @@
 # when running the docker container as with `-c` parameter like this:
 #
 #   ```
-#   docker run --rm --name my-spreed-webrtc -p 8080:8080 -p 8443:8443 \
-#       -v `pwd`:/srv/extra -i -t spreed-webrtc \
+#   docker run --rm --name my-open-rtc -p 8080:8080 -p 8443:8443 \
+#       -v `pwd`:/srv/extra -i -t open-rtc \
 #       -c /srv/extra/server.conf
 #   ```
 #
@@ -59,17 +59,17 @@ RUN apt-get update && apt-get install -qy \
 	automake \
 	autoconf
 
-# Add and build Spreed WebRTC server.
-ADD . /srv/spreed-webrtc
-WORKDIR /srv/spreed-webrtc
+# Add and build Open-RTC server.
+ADD . /srv/open-rtc
+WORKDIR /srv/open-rtc
 RUN mkdir -p /usr/share/gocode/src
 RUN ./autogen.sh && \
 	./configure && \
 	make pristine && \
 	make get && \
 	make tarball
-RUN rm /srv/spreed-webrtc/dist_*/*.tar.gz
-RUN mv /srv/spreed-webrtc/dist_*/spreed-webrtc-* /srv/spreed-webrtc/dist
+RUN rm /srv/open-rtc/dist_*/*.tar.gz
+RUN mv /srv/open-rtc/dist_*/open-rtc-* /srv/open-rtc/dist
 
 
 
@@ -77,8 +77,8 @@ RUN mv /srv/spreed-webrtc/dist_*/spreed-webrtc-* /srv/spreed-webrtc/dist
 FROM frolvlad/alpine-glibc:alpine-3.3_glibc-2.23
 LABEL maintainer="Simon Eisenmann <simon@struktur.de>"
 
-# Add Spreed WebRTC as provided by builder
-COPY --from=0 /srv/spreed-webrtc/dist /srv/spreed-webrtc/dist
+# Add Open-RTC as provided by builder
+COPY --from=0 /srv/open-rtc/dist /srv/open-rtc/dist
 
 # Add entrypoint required by run.
 COPY scripts/docker_entrypoint.sh /srv/entrypoint.sh
@@ -90,20 +90,20 @@ RUN apk add --no-cache \
 	openssl
 
 # Move around stuff from tarball to their expected locations.
-RUN mv /srv/spreed-webrtc/dist/loader/* /srv/spreed-webrtc && \
-	rm -rf /srv/spreed-webrtc/dist/loader && \
-	mv /srv/spreed-webrtc/dist/www/html /srv/spreed-webrtc && \
-	mv /srv/spreed-webrtc/dist/www/static /srv/spreed-webrtc && \
-	rm -rf /srv/spreed-webrtc/dist/www
+RUN mv /srv/open-rtc/dist/loader/* /srv/open-rtc && \
+	rm -rf /srv/open-rtc/dist/loader && \
+	mv /srv/open-rtc/dist/www/html /srv/open-rtc && \
+	mv /srv/open-rtc/dist/www/static /srv/open-rtc && \
+	rm -rf /srv/open-rtc/dist/www
 
 # Create default config.
-RUN cp -v /srv/spreed-webrtc/server.conf.in /srv/spreed-webrtc/default.conf && \
-	sed -i 's|listen = 127.0.0.1:8080|listen = 0.0.0.0:8080|' /srv/spreed-webrtc/default.conf && \
-	sed -i 's|;root = .*|root = /srv/spreed-webrtc|' /srv/spreed-webrtc/default.conf && \
-	sed -i 's|;listen = 127.0.0.1:8443|listen = 0.0.0.0:8443|' /srv/spreed-webrtc/default.conf && \
-	sed -i 's|;certificate = .*|certificate = /srv/cert.pem|' /srv/spreed-webrtc/default.conf && \
-	sed -i 's|;key = .*|key = /srv/privkey.pem|' /srv/spreed-webrtc/default.conf && \
-	touch /etc/spreed-webrtc-server.conf
+RUN cp -v /srv/open-rtc/server.conf.in /srv/open-rtc/default.conf && \
+	sed -i 's|listen = 127.0.0.1:8080|listen = 0.0.0.0:8080|' /srv/open-rtc/default.conf && \
+	sed -i 's|;root = .*|root = /srv/open-rtc|' /srv/open-rtc/default.conf && \
+	sed -i 's|;listen = 127.0.0.1:8443|listen = 0.0.0.0:8443|' /srv/open-rtc/default.conf && \
+	sed -i 's|;certificate = .*|certificate = /srv/cert.pem|' /srv/open-rtc/default.conf && \
+	sed -i 's|;key = .*|key = /srv/privkey.pem|' /srv/open-rtc/default.conf && \
+	touch /etc/open-rtc-server.conf
 
 # Cleanup.
 RUN rm -rf /tmp/* /var/cache/apk/*
@@ -117,5 +117,5 @@ EXPOSE 8080
 EXPOSE 8443
 
 # Define entry point with default command.
-ENTRYPOINT ["/bin/sh", "/srv/entrypoint.sh", "-dc", "/srv/spreed-webrtc/default.conf"]
-CMD ["-c", "/etc/spreed-webrtc-server.conf"]
+ENTRYPOINT ["/bin/sh", "/srv/entrypoint.sh", "-dc", "/srv/open-rtc/default.conf"]
+CMD ["-c", "/etc/open-rtc-server.conf"]

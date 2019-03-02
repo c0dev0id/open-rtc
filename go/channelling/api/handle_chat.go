@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -25,7 +26,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/strukturag/spreed-webrtc/go/channelling"
+	"github.com/wargio/open-rtc/go/channelling"
 )
 
 func (api *channellingAPI) HandleChat(session *channelling.Session, chat *channelling.DataChat) {

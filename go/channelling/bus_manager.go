@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -30,7 +31,7 @@ import (
 
 	"github.com/nats-io/nats"
 
-	"github.com/strukturag/spreed-webrtc/go/natsconnection"
+	"github.com/wargio/open-rtc/go/natsconnection"
 )
 
 const (

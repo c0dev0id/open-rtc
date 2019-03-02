@@ -1,13 +1,14 @@
-# French translations for Spreed WebRTC.
+# French translations for Open-RTC.
 # Copyright (C) 2016 struktur AG
-# This file is distributed under the same license as the Spreed WebRTC
+# Copyright 2019 - deroad
+# This file is distributed under the same license as the Open-RTC
 # project.
 # Florent BEAUCHAMP <fbeauchamp@sdis71.fr>, 2013.
 # Mathieu Brunot <mb.mathieu.brunot@gmail.com> , 2018.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Spreed WebRTC 1.0\n"
+"Project-Id-Version: Open-RTC 1.0\n"
 "Report-Msgid-Bugs-To: simon@struktur.de\n"
 "POT-Creation-Date: 2016-08-18 18:21+0200\n"
 "PO-Revision-Date: 2018-01-28 20:38+0200\n"
@@ -832,11 +833,11 @@ msgid "Ok"
 msgstr "OK"
 
 msgid ""
-"Screen sharing requires a browser extension. Please add the Spreed WebRTC"
+"Screen sharing requires a browser extension. Please add the Open-RTC"
 " screen sharing extension to Chrome and try again."
 msgstr ""
 "Le partage d'écran nécessite une extension pour le navigateur. Veuillez "
-"ajouter l'extension \"Spreed WebRTC screen sharing\" et réessayer."
+"ajouter l'extension \"Open-RTC screen sharing\" et réessayer."
 
 msgid "Access code required"
 msgstr "Code d'accès requis"

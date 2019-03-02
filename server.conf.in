@@ -1,10 +1,10 @@
-; Spreed WebRTC server example configuration
+; Open-RTC server example configuration
 
 [http]
 ; HTTP listener in format ip:port.
 listen = 127.0.0.1:8080
 ; Full path to directory where to find the server web assets.
-;root = /usr/share/spreed-webrtc-server/www
+;root = /usr/share/open-rtc-server/www
 ; HTTP socket read timeout in seconds.
 ;readtimeout = 10
 ; HTTP socket write timeout in seconds.
@@ -35,7 +35,7 @@ listen = 127.0.0.1:8080
 
 [app]
 ; HTML page title
-;title = Spreed WebRTC
+;title = Open-RTC
 ; Version string to use for static resources. This defaults to the server
 ; version and should only be changed when you use your own way to invalidate
 ; long cached static resources.
@@ -58,7 +58,7 @@ listen = 127.0.0.1:8080
 ; A supported TURN server is https://code.google.com/p/rfc5766-turn-server/.
 ;turnSecret = the-default-turn-shared-secret-do-not-keep
 ; Fixed username/password credentials to be used for the TURN server.
-; IMPORTANT: This will give all users connected to the spreed-webrtc service
+; IMPORTANT: This will give all users connected to the open-rtc service
 ; access to the credentials, so in almost all cases the shared secret mode
 ; should be used instead!!
 ;turnUsername = the-turn-username
@@ -119,7 +119,7 @@ serverRealm = local
 ; extra-* template slots. If the extra folder has a sub folder "static", the
 ; resources in this static folder will be available as /extra/static/...
 ; relative to your servers base URL.
-;extra = /usr/share/spreed-webrtc-server/extra
+;extra = /usr/share/open-rtc-server/extra
 ; Full path to an extra.d directory. Subfolders in this directory will be
 ; searched for head.html and body.html on startup. If found, those templates
 ; will be automatically included for the web client. In addition,
@@ -130,10 +130,10 @@ serverRealm = local
 ; plugin in the extra/static folder (see above) or provide another folder using
 ; a front end webserver. Check the doc folder for more info about plugins and
 ; examples.
-;extra.d = /usr/share/spreed-webrtc-server/extra.d
+;extra.d = /usr/share/open-rtc-server/extra.d
 ;plugin = extra/static/myplugin.js
 ; Content-Security-Policy HTTP response header value.
-; Spreed WebRTC requires inline styles, WebSocket connection to itself and
+; Open-RTC requires inline styles, WebSocket connection to itself and
 ; data: URL for images.
 ; The currently recommended CSP is:
 ;   default-src 'self';
@@ -158,7 +158,7 @@ serverRealm = local
 ;roomlocking = true
 
 [log]
-;logfile = /var/log/spreed-webrtc-server.log
+;logfile = /var/log/open-rtc-server.log
 
 [users]
 ; Set to true to enable user functionality.
@@ -238,7 +238,7 @@ enabled = false
 ; configuration files with overwrite. Only takes effect when a NATS server URL
 ; is configured. Defaults to false.
 ;configFromNATS = false
-;configFromNATSSubject = spreed-webrtc.config.get
+;configFromNATSSubject = open-rtc.config.get
 ; NATS config load timeout. If 0, then it waits forever, blocking the startup
 ; until the configuration was loaded from NATS. Defaults to 0.
 ;configFromNATSTimeout = 0

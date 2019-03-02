@@ -1,8 +1,9 @@
 /*
- * Spreed WebRTC.
+ * Open-RTC.
  * Copyright (C) 2013-2015 struktur AG
+ * Copyright 2019 - deroad
  *
- * This file is part of Spreed WebRTC.
+ * This file is part of Open-RTC.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -208,7 +209,7 @@
 
 	window.addEventListener("message", function(event) {
 		if (event.origin !== PARENT_ORIGIN) {
-			// only accept messages from spreed-webrtc
+			// only accept messages from open-rtc
 			return;
 		}
 		var msg = event.data;

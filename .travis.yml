@@ -1,5 +1,5 @@
 # stats available at
-# https://travis-ci.org/strukturag/spreed-webrtc/
+# https://travis-ci.org/wargio/open-rtc/
 language: go
 
 go:
@@ -32,7 +32,7 @@ install:
   - npm install
 
 script:
-  - docker build -t spreed-webrtc -f Dockerfile .
+  - docker build -t open-rtc -f Dockerfile .
   - ./autogen.sh
   - ./configure
   - make styleshint

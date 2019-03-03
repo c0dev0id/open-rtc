@@ -188,7 +188,7 @@ define([
 
 		});
 
-		app.directive("spreedWebrtc", [function() {
+		app.directive("openRtc", [function() {
 			return {
 				restrict: "A",
 				scope: false,

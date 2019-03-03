@@ -172,9 +172,9 @@ tarball: distclean release install
 	mkdir -pv $(TARPATH)/www/static/js/sandboxes
 	mkdir -pv $(TARPATH)/bin
 	cp bin/$(EXENAME) $(TARPATH)/bin
-	cp -R doc/ $(TARPATH)/doc
-	cp -R html/ $(TARPATH)/www/html
-	cp -R static/ $(TARPATH)/www/static/
+	cp -R doc/ $(TARPATH)/
+	cp -R html/ $(TARPATH)/www/
+	cp -R static/ $(TARPATH)/www/
 	cp $(OUTPUT_JS)/*.js $(TARPATH)/www/static/js
 	cp $(OUTPUT_JS)/libs/pdf/*.js $(TARPATH)/www/static/js/libs/pdf
 	cp $(OUTPUT_JS)/sandboxes/*.js $(TARPATH)/www/static/js/sandboxes

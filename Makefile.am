@@ -145,8 +145,6 @@ release-binary: dist_gopath $(DIST_BIN) binary
 
 release: release-binary release-assets
 
-install: install-binary install-assets
-
 clean:
 	$(GO) clean -i -r app/... 2>/dev/null || true
 	rm -rf $(CURDIR)/static/fonts
@@ -169,13 +167,19 @@ $(DIST_BIN):
 	$(MKDIR_P) $@
 
 tarball: TARPATH = $(DIST)/$(PACKAGE_NAME)-$(PACKAGE_VERSION)
-tarball: BIN = $(TARPATH)/loader
-tarball: DOCS = $(TARPATH)/loader/docs
-tarball: SHARE = $(TARPATH)/
 tarball: distclean release install
-		mkdir -pv $(TARPATH)
-		echo -n $(PACKAGE_VERSION) > $(TARPATH)/version.txt
-		cp server.conf.in $(TARPATH)/loader
-		tar czf $(DIST)/$(PACKAGE_NAME)-$(PACKAGE_VERSION)_$(BUILD_OS)_$(BUILD_ARCH).tar.gz -C $(DIST) $(PACKAGE_NAME)-$(PACKAGE_VERSION)
+	mkdir -pv $(TARPATH)/www/static/js/libs/pdf
+	mkdir -pv $(TARPATH)/www/static/js/sandboxes
+	mkdir -pv $(TARPATH)/bin
+	cp bin/$(EXENAME) $(TARPATH)/bin
+	cp -R doc/ $(TARPATH)/doc
+	cp -R html/ $(TARPATH)/www/html
+	cp -R static/ $(TARPATH)/www/static/
+	cp $(OUTPUT_JS)/*.js $(TARPATH)/www/static/js
+	cp $(OUTPUT_JS)/libs/pdf/*.js $(TARPATH)/www/static/js/libs/pdf
+	cp $(OUTPUT_JS)/sandboxes/*.js $(TARPATH)/www/static/js/sandboxes
+	echo -n $(PACKAGE_VERSION) > $(TARPATH)/version.txt
+	cp server.conf.in $(TARPATH)/server.conf
+	tar czf $(DIST)/$(PACKAGE_NAME)-$(PACKAGE_VERSION)_$(BUILD_OS)_$(BUILD_ARCH).tar.gz -C $(DIST) $(PACKAGE_NAME)-$(PACKAGE_VERSION)
 
-.PHONY: clean distclean govendorclean pristine goget gogetupdate build javascript fonts styles release release-binary dist_gopath install install-binary install-assets gopath binary binaryrace binaryall tarball assets dependencies.tsv
+.PHONY: clean distclean govendorclean pristine goget gogetupdate build javascript fonts styles release release-binary dist_gopath gopath binary binaryrace binaryall tarball assets dependencies.tsv

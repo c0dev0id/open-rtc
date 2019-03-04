@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+/* global MediaStream */
 
 "use strict";
 define(['jquery', 'underscore', 'mediastream/peercall', 'mediastream/tokens'], function($, _, PeerCall, tokens) {
@@ -72,6 +73,11 @@ define(['jquery', 'underscore', 'mediastream/peercall', 'mediastream/tokens'], f
 
 	// Static function.
 	PeerScreenshare.getCaptureMediaConstraints = function(webrtc, options) {
+		var stream = null;
+		if (options instanceof MediaStream) {
+			stream = options;
+			options = {};
+		}
 
 		var screenWidth = window.screen.width;
 		var screenHeight = window.screen.height;
@@ -88,6 +94,9 @@ define(['jquery', 'underscore', 'mediastream/peercall', 'mediastream/tokens'], f
 			audio: false
 		});
 		mediaConstraints.video.mandatory = mandatoryVideoConstraints;
+		if (stream) {
+			mediaConstraints.video.mediaSource = stream;
+		}
 		console.log("Setting screen sharing media constraints", mediaConstraints);
 		return mediaConstraints;
 

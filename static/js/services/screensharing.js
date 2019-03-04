@@ -58,8 +58,7 @@ define(['underscore', 'text!partials/screensharedialogff.html', 'webrtc.adapter'
 			// Chrome support.
 			if ($window.webrtcDetectedBrowser === "chrome") {
 
-				if ($window.webrtcDetectedVersion >= 32 &&
-					$window.webrtcDetectedVersion < 37) {
+				if ($window.webrtcDetectedVersion >= 32 && $window.webrtcDetectedVersion < 37) {
 					// Support for flag based developer screen sharing came in Chrome 32.
 					// It was removed in Chrome 37 in favour of chrome.chooseDesktopMedia
 					// https://code.google.com/p/chromium/issues/detail?id=347641
@@ -75,63 +74,80 @@ define(['underscore', 'text!partials/screensharedialogff.html', 'webrtc.adapter'
 						d.resolve(opts);
 						return d.promise;
 					};
-				} else if ($window.webrtcDetectedVersion >= 37) {
+				} else if ($window.webrtcDetectedVersion >= 37 && $window.webrtcDetectedVersion < 70) {
 					// We need a extension to support screen sharing. See
 					// https://developer.chrome.com/extensions/desktopCapture#method-chooseDesktopMedia
 					// for details.
-				}
+					if (chromeExtension.available) {
 
-				if (chromeExtension.available) {
-
-					this.supported = true;
-					var pending = null;
-					this.prepare = function(options) {
-						var select = chromeExtension.call({
-							Type: "Action",
-							Action: "chooseDesktopMedia"
-						});
-						var d = $q.defer();
-						select.then(function(id) {
-							// Success with id.
-							pending = null;
-							if (id) {
-								var opts = _.extend({
-									chromeMediaSource: "desktop",
-									chromeMediaSourceId: id
-								}, options);
-								d.resolve(opts);
-							} else {
-								d.resolve(null);
+						this.supported = true;
+						var pending = null;
+						this.prepare = function(options) {
+							var select = chromeExtension.call({
+								Type: "Action",
+								Action: "chooseDesktopMedia"
+							});
+							var d = $q.defer();
+							select.then(function(id) {
+								// Success with id.
+								pending = null;
+								if (id) {
+									var opts = _.extend({
+										chromeMediaSource: "desktop",
+										chromeMediaSourceId: id
+									}, options);
+									d.resolve(opts);
+								} else {
+									d.resolve(null);
+								}
+							}, function(err) {
+								// Error.
+								pending = null;
+								console.log("Failed to prepare screensharing", err);
+								d.reject(err);
+							}, function(data) {
+								// Notify.
+								pending = data;
+							});
+							return d.promise;
+						};
+						this.cancel = function() {
+							if (pending !== null) {
+								chromeExtension.call({
+									Type: "Action",
+									Action: "cancelChooseDesktopMedia",
+									Args: pending
+								});
+								pending = null;
 							}
-						}, function(err) {
-							// Error.
-							pending = null;
-							console.log("Failed to prepare screensharing", err);
+						};
+
+					} else {
+
+						// Check if we always should do autoinstall if the extension is not there.
+						if (chromeExtension.autoinstall.force) {
+							this.supported = false;
+						}
+
+					}
+				} else if ($window.webrtcDetectedVersion >= 70) {
+					this.supported = true;
+					this.prepare = function(options) {
+						// This generates constrains for the flag based screen screensharing
+						// support in Chrome 70+. Flag to be enabled is found at:
+						// https://groups.google.com/forum/#!msg/discuss-webrtc/Uf0SrR4uxzk/uO8sLrWuEAAJ
+						// chrome://flags/#enable-experimental-web-platform-features
+						var d = $q.defer();
+						navigator.mediaDevices.getDisplayMedia().then(function(stream) {
+							//var opts = _.extend({
+							//	mediaSource: source
+							//}, options);
+							d.resolve(stream);
+						}).catch(function(err) {
 							d.reject(err);
-						}, function(data) {
-							// Notify.
-							pending = data;
 						});
 						return d.promise;
 					};
-					this.cancel = function() {
-						if (pending !== null) {
-							chromeExtension.call({
-								Type: "Action",
-								Action: "cancelChooseDesktopMedia",
-								Args: pending
-							});
-							pending = null;
-						}
-					};
-
-				} else {
-
-					// Check if we always should do autoinstall if the extension is not there.
-					if (chromeExtension.autoinstall.force) {
-						this.supported = false;
-					}
-
 				}
 
 			} else if ($window.webrtcDetectedBrowser === "firefox") {

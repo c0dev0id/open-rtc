@@ -19,6 +19,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+/* global MediaStream */
 
 "use strict";
 define(['jquery', 'underscore', 'audiocontext', 'mediastream/dummystream', 'webrtc.adapter'], function($, _, AudioContext, DummyStream) {
@@ -176,7 +177,6 @@ define(['jquery', 'underscore', 'audiocontext', 'mediastream/dummystream', 'webr
 
 	// UserMedia.
 	var UserMedia = function(options) {
-
 		this.options = $.extend({}, options);
 		this.e = $({}); // Events.
 
@@ -356,6 +356,12 @@ define(['jquery', 'underscore', 'audiocontext', 'mediastream/dummystream', 'webr
 		try {
 			console.log('Requesting access to local media with mediaConstraints:\n' +
 				'  \'' + JSON.stringify(constraints) + '\'', constraints);
+			if (constraints.video.mediaSource instanceof MediaStream) {
+				// chrome 70+ will already return a stream, which is already running. 
+				this.started = true;
+				this.onUserMediaSuccess(constraints.video.mediaSource);
+				return true;
+			}
 			getUserMedia(constraints, _.bind(this.onUserMediaSuccess, this), _.bind(this.onUserMediaError, this));
 			this.started = true;
 			return true;

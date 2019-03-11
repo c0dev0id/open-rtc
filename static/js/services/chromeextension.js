@@ -121,7 +121,7 @@ define(["underscore", "jquery", "webrtc.adapter"], function(_, $) {
 
 		// Always register default auto install which tells user that extension is required
 		// if screen sharing can only work with extension.
-		if ($window.webrtcDetectedBrowser === "chrome" && $window.webrtcDetectedVersion >= 37) {
+		if ($window.webrtcDetectedBrowser === "chrome" && $window.webrtcDetectedVersion >= 37 && $window.webrtcDetectedVersion < 70) {
 			extension.registerAutoInstall(function() {
 				var d = $q.defer();
 				alertify.dialog.alert(translation._("Screen sharing requires a browser extension. Please add the Open-RTC screen sharing extension to Chrome and try again."));
